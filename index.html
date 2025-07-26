@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProCourses - Professional Course Platform</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --font-family: 'Poppins', sans-serif;
+            --border-radius: 12px;
+
+
+            --bg-color: #121212;
+            --bg-color-2: #1e1e1e;
+            --bg-color-transparent: rgba(25, 25, 25, 0.8);
+            --text-color: #e0e0e0;
+            --text-color-muted: #a0a0a0;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        body.light-mode {
+
+            --bg-color: #f8f9fa;
+            --bg-color-2: #ffffff;
+            --bg-color-transparent: rgba(255, 255, 255, 0.8);
+            --text-color: #212529;
+            --text-color-muted: #6c757d;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+
+            background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            padding-top: 70px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .navbar {
+            background: var(--bg-color-transparent);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .icon-link {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            position: relative;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .icon-link .badge {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background: var(--primary-color);
+            color: #ffffff;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .theme-switcher {
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-family);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+        }
+        .btn-secondary {
+            background-color: var(--secondary-color);
+        }
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.4);
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        #hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            background: rgba(0,0,0,0.3); 
+        }
+        #hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+        #hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: auto;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        body.light-mode #hero h1,
+        body.light-mode #hero p {
+            color:white;
+        }
+
+        section {
+            padding: 4rem 2rem;
+            background-color: var(--bg-color-transparent); 
+            transition: background-color 0.3s ease;
+            margin: 2rem auto;
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(5px);
+        }
+        section.container {
+             width: 90%;
+             max-width: 1200px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-color-muted);
+            margin-bottom: 3rem;
+        }
+
+        .filters-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        .search-box, .filter-box {
+            background-color: var(--bg-color-2);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 0.75rem 1rem;
+            color: var(--text-color);
+            font-family: var(--font-family);
+            font-size: 1rem;
+            min-width: 250px;
+        }
+        .search-box::placeholder {
+            color: var(--text-color-muted);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background: var(--bg-color-2);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+        }
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        .course-card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .course-card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .course-category {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        .course-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        .course-rating {
+            margin-bottom: 1rem;
+            color: #ffc107;
+        }
+        .course-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: auto;
+            margin-bottom: 1.5rem;
+        }
+        .course-card-btns {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .btn-cart {
+            background: var(--primary-color);
+            grid-column: 1 / -1;
+        }
+        .btn-fav {
+            background: transparent;
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+            padding: 10px;
+            width: 44px; 
+            height: 44px; 
+        }
+        .btn-fav:hover {
+            background: var(--secondary-color);
+            color: #ffffff;
+        }
+        .btn-fav.active {
+            background: #dc3545;
+            border-color: #dc3545;
+            color: #ffffff;
+        }
+
+        #contact form {
+            max-width: 600px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: var(--bg-color-2);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        #contact form input,
+        #contact form textarea {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-size: 1rem;
+            font-family: var(--font-family);
+        }
+
+       
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            animation: fadeIn 0.5s;
+        }
+        .modal-content {
+            background: var(--bg-color-2);
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 700px;
+            position: relative;
+            animation: slideIn 0.5s;
+            border: 1px solid var(--border-color);
+        }
+        .close-btn {
+            color: #aaa;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-btn:hover {
+            color: var(--text-color);
+        }
+        #modal-body h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .btn-remove-item {
+            background: transparent;
+            color: #dc3545;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px 10px;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            line-height: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .btn-remove-item:hover {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .modal-list-item .quantity-controls button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Footer */
+        footer {
+            text-align: left;
+            padding: 4rem 0 2rem 0;
+            background: #111;
+            color: #aaa;
+            margin-top: 2rem;
+            border-top: 2px solid var(--primary-color);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-col h4 {
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+        }
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            height: 2px;
+            width: 50px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-col p {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-col .logo {
+             margin-bottom: 1rem;
+             display: inline-block;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease, padding-left 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255,255,255,0.2);
+            margin: 0 10px 10px 0;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            color: #ffffff;
+            transition: all 0.5s ease;
+        }
+        .social-links a:hover {
+            color: #ffffff;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .modal-list { list-style: none; max-height: 40vh; overflow-y: auto; padding-right: 1rem; }
+        .modal-list-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color); }
+        .modal-list-item:last-child { border-bottom: none; }
+        .modal-list-item img { width: 80px; height: 50px; object-fit: cover; border-radius: 8px; margin-right: 1rem; }
+        .modal-list-info { flex-grow: 1; }
+        .modal-list-info h4 { font-size: 1rem; margin: 0; }
+        .modal-list-info p { font-size: 0.9rem; color: var(--primary-color); margin: 0; }
+        .modal-list-item .quantity-controls { display: flex; align-items: center; gap: 5px; }
+        .modal-list-item .quantity-controls button { background: var(--primary-color); color: white; border: none; border-radius: 5px; width: 25px; height: 25px; display: flex; justify-content: center; align-items: center; cursor: pointer; font-size: 1rem; }
+        .modal-list-item .quantity-controls span { padding: 0 8px; font-weight: bold; }
+        .modal-total { text-align: right; font-size: 1.5rem; font-weight: bold; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px solid var(--border-color); }
+        
+ 
+        #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 3000; display: flex; flex-direction: column; gap: 10px; }
+        .toast { background-color: var(--primary-color); color: white; padding: 15px 20px; border-radius: var(--border-radius); box-shadow: 0 4px 15px rgba(0,0,0,0.2); opacity: 0; transform: translateX(100%); transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
+        .toast.show { opacity: 1; transform: translateX(0); }
+        .toast.success { background-color: #28a745; }
+        .toast.error { background-color: #dc3545; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+ 
+        @media (max-width: 992px) {
+            .nav-links { display: none; flex-direction: column; width: 100%; position: absolute; top: 68px; left: 0; background: var(--bg-color-2); padding: 1rem 0; border-top: 1px solid var(--border-color); }
+            .nav-links.active { display: flex; }
+            .nav-links li { margin: 1rem 0; text-align: center; }
+            .menu-toggle { display: block; }
+            #hero h1 { font-size: 2.5rem; }
+            .nav-icons { gap: 15px; }
+        }
+        @media (max-width: 768px) {
+            .courses-grid { grid-template-columns: 1fr; }
+            .filters-container { flex-direction: column; align-items: stretch; }
+        }
+
+    
+
+    </style>
+</head>
+<body class="">
+
+    <div id="toast-container"></div>
+
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="#" class="logo"><i class="fas fa-graduation-cap"></i>ProCourses</a>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a class="icon-link theme-switcher">
+                        <i class="fas fa-sun"></i>
+                    </a>
+                    <a class="icon-link" id="favorites-btn">
+                        <i class="fas fa-heart"></i>
+                        <span class="badge" id="favorites-count">0</span>
+                    </a>
+                    <a class="icon-link" id="cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="badge" id="cart-count">0</span>
+                    </a>
+                  <div id="auth-container">
+                    <a href="#" class="btn btn-primary d-flex align-items-center gap-2 px-4 py-2 rounded-pill" id="login-btn-main">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>Login</span>
+                    </a>
+                  </div>
+
+                </div>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Discover Your Passion, Master Your Skills</h1>
+                <p>Join thousands of learners and start your journey to professionalism with the best online courses.</p>
+            </div>
+        </section>
+
+        <section id="courses" class="container">
+            <h2 class="section-title">Our Courses</h2>
+            <p class="section-subtitle">Explore our latest selection of high-quality courses</p>
+            <div class="filters-container">
+                <input type="text" id="search-input" class="search-box" placeholder="Search for courses...">
+                <select id="filter-select" class="filter-box">
+                    <option value="all">All Categories</option>
+                </select>
+            </div>
+            <div class="courses-grid" id="courses-container">
+            </div>
+        </section>
+
+        <section id="about" class="container">
+             <h2 class="section-title">About Us</h2>
+             <p class="section-subtitle">Learn more about our mission and values.</p>
+             <p>Welcome to ProCourses, your premier destination for professional development and skill enhancement. We believe that continuous learning is key to success in today's rapidly evolving world. Our platform offers a diverse range of high-quality courses, meticulously designed by industry experts to equip you with the knowledge and practical skills you need to excel in your career and personal life.</p>
+        </section>
+
+        <section id="contact" class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <p class="section-subtitle">Have questions? We're here to help!</p>
+            <form id="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <input type="text" placeholder="Subject">
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="modal-body">
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo">ProCourses</a>
+                    <p>Your premier destination for professional development and skill enhancement. Join our community and transform your future today.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">Data Science</a></li>
+                        <li><a href="#">Marketing</a></li>
+                        <li><a href="#">Business</a></li>
+                        <li><a href="#">Design</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                     <ul class="footer-links">
+                         <li><i class="fas fa-map-marker-alt"></i> 123 Street, New York, USA</li>
+                         <li><i class="fas fa-phone"></i> +012 345 67890</li>
+                         <li><i class="fas fa-envelope"></i> info@procourses.com</li>
+                     </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                 <p>&copy; 2025 ProCourses. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+     const courses = [
+    {
+        id: 1,
+        title: 'Modern Web Development (React)',
+        price: 49.99,
+        rating: 4.8,
+        image: 'https://i.ytimg.com/vi/XxXyfkrP298/maxresdefault.jpg',
+        description: 'Learn to build fast, interactive web applications with React.js, from basics to advanced concepts.',
+        category: 'Web Development',
+        videoUrl: 'https://www.youtube.com/embed/XxXyfkrP298'
+    },
+    {
+        id: 2,
+        title: 'Python for Everybody',
+        price: 29.99,
+        rating: 4.9,
+        image: 'https://i.ytimg.com/vi/rfscVS0vtbw/maxresdefault.jpg',
+        description: 'A comprehensive course that takes you from zero to hero in Python, one of the most in-demand programming languages.',
+        category: 'Programming',
+        videoUrl: 'https://www.youtube.com/embed/rfscVS0vtbw'
+    },
+    {
+        id: 3,
+        title: 'Graphic Design with Photoshop',
+        price: 39.99,
+        rating: 4.7,
+        image: 'https://i.ytimg.com/vi/IyR_uYsRdPs/maxresdefault.jpg',
+        description: 'Master Adobe Photoshop and learn the secrets of graphic design and photo manipulation like a pro.',
+        category: 'Design',
+        videoUrl: 'https://www.youtube.com/embed/IyR_uYsRdPs'
+    },
+    {
+        id: 4,
+        title: 'Data Science & Machine Learning',
+        price: 79.99,
+        rating: 5.0,
+        image: 'https://i.ytimg.com/vi/7eh4d6sabA0/maxresdefault.jpg',
+        description: 'Enter the world of big data and AI. Learn to analyze data and build powerful machine learning models.',
+        category: 'Data Science',
+        videoUrl: 'https://www.youtube.com/embed/7eh4d6sabA0'
+    },
+    {
+        id: 5,
+        title: 'The Complete Digital Marketing Course',
+        price: 45.00,
+        rating: 4.6,
+        image: 'https://i.ytimg.com/vi/tsGlD2_8u9I/maxresdefault.jpg',
+        description: 'Covers SEO, Google Ads, social media marketing, and more to help you grow any business online.',
+        category: 'Marketing',
+        videoUrl: 'https://www.youtube.com/embed/tsGlD2_8u9I'
+    },
+    {
+        id: 6,
+        title: 'Mobile App Development (Flutter)',
+        price: 59.99,
+        rating: 4.8,
+        image: 'https://i.ytimg.com/vi/1gDhl4leEzA/maxresdefault.jpg',
+        description: 'Learn to build beautiful, natively compiled applications for mobile (Android & iOS) from a single codebase with Flutter.',
+        category: 'Mobile Development',
+        videoUrl: 'https://www.youtube.com/embed/1gDhl4leEzA'
+    },
+    {
+        id: 7,
+        title: 'Project Management Professional (PMP)',
+        price: 69.99,
+        rating: 4.9,
+        image: 'https://i.ytimg.com/vi/l1EssrLxt7E/maxresdefault.jpg',
+        description: 'Prepare for the PMP certification and learn best practices in project management to lead any project to success.',
+        category: 'Business',
+        videoUrl: 'https://www.youtube.com/embed/l1EssrLxt7E'
+    },
+    {
+        id: 8,
+        title: 'Cybersecurity for Beginners',
+        price: 55.50,
+        rating: 4.7,
+        image: 'https://i.ytimg.com/vi/U_P23SqJaDc/maxresdefault.jpg',
+        description: 'Learn the fundamentals of cybersecurity and how to protect systems and networks from cyber attacks.',
+        category: 'IT & Security',
+        videoUrl: 'https://www.youtube.com/embed/U_P23SqJaDc'
+    },
+    {
+        id: 9,
+        title: 'Advanced JavaScript Concepts',
+        price: 49.99,
+        rating: 4.8,
+        image: 'https://i.ytimg.com/vi/l5IgdXi2UvY/maxresdefault.jpg',
+        description: 'Deep dive into closures, prototypal inheritance, async/await, and other advanced JS topics.',
+        category: 'Web Development',
+        videoUrl: 'https://www.youtube.com/embed/l5IgdXi2UvY'
+    },
+    {
+        id: 10,
+        title: 'UI/UX Design Fundamentals',
+        price: 44.99,
+        rating: 4.9,
+        image: 'https://i.ytimg.com/vi/c9Wg6Cb_YlU/maxresdefault.jpg',
+        description: 'Learn the principles of User Interface and User Experience design to create intuitive and beautiful digital products.',
+        category: 'Design',
+        videoUrl: 'https://www.youtube.com/embed/c9Wg6Cb_YlU'
+    },
+    {
+        id: 11,
+        title: 'SQL for Data Analysis',
+        price: 34.99,
+        rating: 4.7,
+        image: 'https://i.ytimg.com/vi/p3qvj9hO_Bo/maxresdefault.jpg',
+        description: 'Master SQL to query and analyze data from databases, a critical skill for any data professional.',
+        category: 'Data Science',
+        videoUrl: 'https://www.youtube.com/embed/p3qvj9hO_Bo'
+    },
+    {
+        id: 12,
+        title: 'Content Creation & Strategy',
+        price: 39.99,
+        rating: 4.6,
+        image: 'https://i.ytimg.com/vi/jG7dSXcfVqE/maxresdefault.jpg',
+        description: 'Learn how to create compelling content and build a strategy that engages your audience and drives results.',
+        category: 'Marketing',
+        videoUrl: 'https://www.youtube.com/embed/jG7dSXcfVqE'
+    },
+    {
+        id: 13,
+        title: 'Cloud Computing with AWS',
+        price: 89.99,
+        rating: 4.9,
+        image: 'https://i.ytimg.com/vi/Q0jsjl1DlL0/maxresdefault.jpg',
+        description: 'Become proficient in Amazon Web Services, from EC2 to S3 and Lambda functions.',
+        category: 'IT & Security',
+        videoUrl: 'https://www.youtube.com/embed/Q0jsjl1DlL0'
+    },
+    {
+        id: 14,
+        title: 'Financial Modeling & Valuation',
+        price: 74.99,
+        rating: 4.8,
+        image: 'https://images.shiksha.com/mediadata/images/articles/1701167453phpgYejIn.jpeg',
+        description: 'Build robust financial models and learn to value companies for investment decisions.',
+        category: 'Business',
+        videoUrl: 'https://www.youtube.com/embed/XUoDTD-XTbk'
+    },
+    {
+        id: 15,
+        title: 'Game Development with Unity',
+        price: 64.99,
+        rating: 4.7,
+        image: 'https://i.ytimg.com/vi/gB1F9G0JXOo/maxresdefault.jpg',
+        description: 'Create your own 2D and 3D games using the Unity engine and C# scripting.',
+        category: 'Programming',
+        videoUrl: 'https://www.youtube.com/embed/gB1F9G0JXOo'
+    },
+    {
+        id: 16,
+        title: 'Ethical Hacking & Penetration Testing',
+        price: 99.99,
+        rating: 5.0,
+        image: 'https://i.ytimg.com/vi/3Kq1MIfTWCE/maxresdefault.jpg',
+        description: 'Understand the mindset of a hacker to protect systems from cyber threats.',
+        category: 'IT & Security',
+        videoUrl: 'https://www.youtube.com/embed/3Kq1MIfTWCE'
+    },
+    {
+        id: 17,
+        title: 'Blockchain & Cryptocurrency Fundamentals',
+        price: 52.00,
+        rating: 4.5,
+        image: 'https://i.ytimg.com/vi/gyMwXuJrbJQ/maxresdefault.jpg',
+        description: 'Demystify blockchain technology and learn about Bitcoin, Ethereum, and smart contracts.',
+        category: 'IT & Security',
+        videoUrl: 'https://www.youtube.com/embed/gyMwXuJrbJQ'
+    },
+    {
+        id: 19,
+        title: 'Photography Masterclass: From Beginner to Pro',
+        price: 49.99,
+        rating: 4.9,
+        image: 'https://images.squarespace-cdn.com/content/v1/64ee3953126c653b251cff47/1693333877922-ABPAXYHMNHIELXXPZO3H/Screen-Shot-2021-07-14-at-12.51.00-PM_0.jpg',
+        description: 'Learn the art and science of photography, from camera basics to advanced editing techniques.',
+        category: 'Creative Arts',
+        videoUrl: 'https://www.youtube.com/embed/yhAmMUi2NmM'
+    },
+    {
+        id: 20,
+        title: 'Video Editing with Adobe Premiere Pro',
+        price: 39.99,
+        rating: 4.7,
+        image: 'https://i.ytimg.com/vi/LEXUvUJ5jHw/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD70PD7s5L8RSSEkoLODbaJv0WyTQ',
+        description: 'Edit stunning videos for YouTube, social media, and more using industry-standard software.',
+        category: 'Creative Arts',
+        videoUrl: 'https://www.youtube.com/embed/keoszhf4DZ8'
+    },
+    {
+        id: 21,
+        title: 'Public Speaking & Presentation Skills',
+        price: 29.99,
+        rating: 4.6,
+        image: 'https://i.ytimg.com/vi/tShavGuo0_E/maxresdefault.jpg',
+        description: 'Overcome fear and deliver impactful presentations with confidence and clarity.',
+        category: 'Soft Skills',
+        videoUrl: 'https://www.youtube.com/embed/tShavGuo0_E'
+    },
+    {
+        id: 22,
+        title: 'Negotiation Skills for Success',
+        price: 35.00,
+        rating: 4.7,
+        image: 'https://i.ytimg.com/vi/guZa7mQV1l0/maxresdefault.jpg',
+        description: 'Master the art of negotiation to achieve better outcomes in business and life.',
+        category: 'Soft Skills',
+        videoUrl: 'https://www.youtube.com/embed/guZa7mQV1l0'
+    },
+    {
+        id: 23,
+        title: 'Excel for Business Analysts',
+        price: 42.50,
+        rating: 4.8,
+        image: 'https://static-media.hotmart.com/_-S6ftOV1gDhfaIV5_ztaPGl4Yw=/705x0/https://uploads.teachablecdn.com/attachments/TxTlT0DSlu7RNbifOABK_Excel+for+Biz+Analysts.jpg',
+        description: 'Utilize Excel\'s powerful features for data analysis, reporting, and financial modeling.',
+        category: 'Business',
+        videoUrl: 'https://www.youtube.com/embed/egmzpMBmH70'
+    },
+    {
+        id: 26,
+        title: 'Introduction to Data Structures & Algorithms',
+        price: 55.00,
+        rating: 4.9,
+        image: 'https://i.ytimg.com/vi/RBSGKlAvoiM/maxresdefault.jpg',
+        description: 'Build a strong foundation in computer science with essential data structures and algorithms.',
+        category: 'Programming',
+        videoUrl: 'https://www.youtube.com/embed/RBSGKlAvoiM'
+    },
+    {
+        id: 28,
+        title: 'Business Analytics with Power BI',
+        price: 60.00,
+        rating: 4.7,
+        image: 'https://i.ytimg.com/vi/AGrl-H87pRU/maxresdefault.jpg',
+        description: 'Transform raw data into meaningful insights using Microsoft Power BI.',
+        category: 'Data Science',
+        videoUrl: 'https://www.youtube.com/embed/AGrl-H87pRU'
+    },
+    {
+        id: 29,
+        title: 'Advanced CSS and Sass',
+        price: 39.99,
+        rating: 4.6,
+        image: 'https://i.ytimg.com/vi/_a5j7KoflTs/maxresdefault.jpg',
+        description: 'Elevate your web design skills with advanced CSS techniques and Sass preprocessor.',
+        category: 'Web Development',
+        videoUrl: 'https://www.youtube.com/embed/_a5j7KoflTs'
+    }
+];
+
+            let state = { cart: [], favorites: [], theme: 'dark', isLoggedIn: false };
+            const coursesContainer = document.getElementById('courses-container');
+            const cartCountEl = document.getElementById('cart-count');
+            const favoritesCountEl = document.getElementById('favorites-count');
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modal-body');
+            const closeModalBtn = document.querySelector('.close-btn');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            const themeSwitcher = document.querySelector('.theme-switcher');
+            const searchInput = document.getElementById('search-input');
+            const filterSelect = document.getElementById('filter-select');
+            const cartBtn = document.getElementById('cart-btn');
+            const favoritesBtn = document.getElementById('favorites-btn');
+            const authContainer = document.getElementById('auth-container');
+            const contactForm = document.getElementById('contact-form');
+
+            const loadState = () => { const savedState = JSON.parse(localStorage.getItem('proCoursesState')); if (savedState) { state = savedState; } applyTheme(); updateAuthUI(); updateCounts(); };
+            const saveState = () => { localStorage.setItem('proCoursesState', JSON.stringify(state)); };
+            const showToast = (message, type = 'info') => { const toastContainer = document.getElementById('toast-container'); const toast = document.createElement('div'); toast.className = `toast ${type}`; toast.textContent = message; toastContainer.appendChild(toast); setTimeout(() => toast.classList.add('show'), 10); setTimeout(() => { toast.classList.remove('show'); toast.addEventListener('transitionend', () => toast.remove()); }, 3000); };
+            const applyTheme = () => { if (state.theme === 'light') { document.body.classList.add('light-mode'); themeSwitcher.innerHTML = `<i class="fas fa-moon"></i>`; } else { document.body.classList.remove('light-mode'); themeSwitcher.innerHTML = `<i class="fas fa-sun"></i>`; } };
+            const toggleTheme = () => { state.theme = state.theme === 'dark' ? 'light' : 'dark'; applyTheme(); saveState(); };
+            const renderStars = (rating) => { let stars = ''; const fullStars = Math.floor(rating); const halfStar = rating % 1 >= 0.5; const emptyStars = 5 - fullStars - (halfStar ? 1 : 0); for (let i = 0; i < fullStars; i++) stars += '<i class="fas fa-star"></i>'; if (halfStar) stars += '<i class="fas fa-star-half-alt"></i>'; for (let i = 0; i < emptyStars; i++) stars += '<i class="far fa-star"></i>'; return stars; };
+            const populateFilters = () => { const categories = [...new Set(courses.map(course => course.category))]; categories.sort().forEach(category => { const option = document.createElement('option'); option.value = category; option.textContent = category; filterSelect.appendChild(option); }); };
+            const renderCourses = () => { const searchTerm = searchInput.value.toLowerCase(); const selectedCategory = filterSelect.value; const filteredCourses = courses.filter(course => { const matchesCategory = selectedCategory === 'all' || course.category === selectedCategory; const matchesSearch = course.title.toLowerCase().includes(searchTerm); return matchesCategory && matchesSearch; }); coursesContainer.innerHTML = ''; if (filteredCourses.length === 0) { coursesContainer.innerHTML = `<p style="text-align: center; width: 100%; color: var(--text-color);">No courses found matching your criteria.</p>`; return; } filteredCourses.forEach(course => { const isFavorite = state.favorites.includes(course.id); const courseCard = ` <div class="course-card"> <img src="${course.image}" alt="${course.title}" class="course-card-img"> <div class="course-card-body"> <p class="course-category">${course.category}</p> <h3 class="course-title">${course.title}</h3> <div class="course-rating"> ${renderStars(course.rating)} <span>${course.rating.toFixed(1)}</span> </div> <p class="course-price">$${course.price.toFixed(2)}</p> <div class="course-card-btns"> <button class="btn btn-primary btn-cart" data-id="${course.id}"><i class="fas fa-shopping-cart"></i> Add to Cart</button> <button class="btn btn-fav ${isFavorite ? 'active' : ''}" data-id="${course.id}" title="Add to favorites"><i class="fas fa-heart"></i></button> </div> <button class="btn btn-secondary btn-details" data-id="${course.id}" style="margin-top: 0.5rem; width:100%;">View Details</button> </div> </div> `; coursesContainer.innerHTML += courseCard; }); };
+            const updateCounts = () => { const totalCartItems = state.cart.reduce((sum, item) => sum + item.quantity, 0); cartCountEl.textContent = totalCartItems; favoritesCountEl.textContent = state.favorites.length; };
+            const updateAuthUI = () => { if(state.isLoggedIn) { authContainer.innerHTML = `<a href="#" class="btn btn-secondary" id="logout-btn">Logout</a>`; document.getElementById('logout-btn').addEventListener('click', handleLogout); } else { authContainer.innerHTML = `<a href="#" class="btn btn-primary" id="login-btn">Login</a>`; document.getElementById('login-btn').addEventListener('click', (e) => { e.preventDefault(); showLoginModal(); }); } };
+            const showLoginModal = () => { modalBody.innerHTML = ` <h2>Login</h2> <form class="login-form" id="login-form"> <input type="email" placeholder="Email (e.g., user@example.com)" required> <input type="password" placeholder="Password" required> <button type="submit" class="btn btn-primary">Login</button> </form> `; modal.style.display = 'block'; document.getElementById('login-form').addEventListener('submit', handleLogin); };
+            const handleLogin = (e) => { e.preventDefault(); state.isLoggedIn = true; closeModal(); updateAuthUI(); saveState(); showToast('Login successful!', 'success'); };
+            const handleLogout = (e) => { e.preventDefault(); state.isLoggedIn = false; updateAuthUI(); saveState(); showToast('You have been logged out.'); };
+            const requireLogin = (action) => { if (!state.isLoggedIn) { showToast('Please log in to continue.', 'error'); showLoginModal(); return false; } return true; };
+            const addToCart = (id) => { if (!requireLogin()) return; const existingItem = state.cart.find(item => item.id === id); if (existingItem) { existingItem.quantity++; showToast('Increased course quantity in cart.'); } else { state.cart.push({ id: id, quantity: 1 }); showToast('Course added to cart!', 'success'); } updateCounts(); saveState(); };
+            const updateCartQuantity = (id, change) => { const itemIndex = state.cart.findIndex(item => item.id === id); if (itemIndex > -1) { state.cart[itemIndex].quantity += change; if (state.cart[itemIndex].quantity <= 0) { state.cart.splice(itemIndex, 1); showToast('Course removed from cart.'); } else { showToast('Cart quantity updated.'); } } updateCounts(); saveState(); showCartModal(); };
+            const removeFromCart = (id) => { state.cart = state.cart.filter(item => item.id !== id); updateCounts(); saveState(); showCartModal(); showToast('Course removed from cart.'); };
+            const toggleFavorite = (id, button) => { if (!requireLogin()) return; const index = state.favorites.indexOf(id); if (index === -1) { state.favorites.push(id); button.classList.add('active'); showToast('Added to favorites!', 'success'); } else { state.favorites.splice(index, 1); button.classList.remove('active'); showToast('Removed from favorites.'); } updateCounts(); saveState(); };
+            const removeFromFavorites = (id) => { state.favorites = state.favorites.filter(courseId => courseId !== id); updateCounts(); saveState(); renderCourses(); showFavoritesModal(); showToast('Course removed from favorites.'); };
+        
+            const showDetailsModal = (id) => {
+                const course = courses.find(c => c.id === id);
+                modalBody.innerHTML = `
+                    <h2>${course.title}</h2>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; margin-bottom: 1rem; border-radius: var(--border-radius);">
+                        <iframe
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                            src="${course.videoUrl}"
+                            title="Course Video Player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p>${course.description}</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
+                         <p class="course-price" style="margin: 0;">$${course.price.toFixed(2)}</p>
+                         <button class="btn btn-primary btn-cart" data-id="${course.id}"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                    </div>
+                `;
+                modal.style.display = 'block';
+            };
+
+            const showCartModal = () => { let content = '<h2>Your Cart</h2>'; if (state.cart.length === 0) { content += '<p>Your cart is empty.</p>'; } else { const cartItemsWithDetails = state.cart.map(cartItem => ({ ...courses.find(c => c.id === cartItem.id), quantity: cartItem.quantity })); let total = 0; content += '<ul class="modal-list">'; cartItemsWithDetails.forEach(item => { total += item.price * item.quantity; content += ` <li class="modal-list-item"> <img src="${item.image}" alt="${item.title}"> <div class="modal-list-info"> <h4>${item.title}</h4> <p>$${item.price.toFixed(2)}</p> </div> <div class="quantity-controls"> <button class="btn-quantity-minus" data-id="${item.id}">-</button> <span>${item.quantity}</span> <button class="btn-quantity-plus" data-id="${item.id}">+</button> </div> <button class="btn-remove-item" data-id="${item.id}" title="Remove from cart"><i class="fas fa-trash-alt"></i></button> </li> `; }); content += '</ul>'; content += `<div class="modal-total">Total: $${total.toFixed(2)}</div>`; } modalBody.innerHTML = content; modal.style.display = 'block'; };
+            const showFavoritesModal = () => { let content = '<h2>Your Favorites</h2>'; if (state.favorites.length === 0) { content += '<p>You have no favorite courses yet.</p>'; } else { const favoriteItems = state.favorites.map(id => courses.find(c => c.id === id)); content += '<ul class="modal-list">'; favoriteItems.forEach(item => { content += ` <li class="modal-list-item"> <img src="${item.image}" alt="${item.title}"> <div class="modal-list-info"> <h4>${item.title}</h4> <p>$${item.price.toFixed(2)}</p> </div> <button class="btn-remove-item" data-fav-id="${item.id}" title="Remove from favorites"><i class="fas fa-trash-alt"></i></button> </li> `; }); content += '</ul>'; } modalBody.innerHTML = content; modal.style.display = 'block'; };
+            const closeModal = () => { modal.style.display = 'none'; };
+
+            coursesContainer.addEventListener('click', (e) => { const btn = e.target.closest('.btn'); if (!btn) return; const courseId = parseInt(btn.dataset.id); if (btn.classList.contains('btn-cart')) { addToCart(courseId); } else if (btn.classList.contains('btn-fav')) { toggleFavorite(courseId, btn); } else if (btn.classList.contains('btn-details')) { showDetailsModal(courseId); } });
+            modal.addEventListener('click', (e) => { if (e.target === modal || e.target.classList.contains('close-btn')) { closeModal(); } const btn = e.target.closest('button'); if (!btn) return; if(btn.classList.contains('btn-cart')) { const courseId = parseInt(btn.dataset.id); addToCart(courseId); closeModal(); } else if (btn.classList.contains('btn-remove-item')) { if(btn.dataset.id) { removeFromCart(parseInt(btn.dataset.id)); } else if (btn.dataset.favId) { removeFromFavorites(parseInt(btn.dataset.favId)); } } else if (btn.classList.contains('btn-quantity-plus')) { updateCartQuantity(parseInt(btn.dataset.id), 1); } else if (btn.classList.contains('btn-quantity-minus')) { updateCartQuantity(parseInt(btn.dataset.id), -1); } });
+            
+            menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+            themeSwitcher.addEventListener('click', toggleTheme);
+            cartBtn.addEventListener('click', () => { if (requireLogin()) showCartModal(); });
+            favoritesBtn.addEventListener('click', () => { if (requireLogin()) showFavoritesModal(); });
+            searchInput.addEventListener('keyup', renderCourses);
+            filterSelect.addEventListener('change', renderCourses);
+            if (contactForm) { contactForm.addEventListener('submit', (e) => { e.preventDefault(); showToast('Message sent successfully!', 'success'); contactForm.reset(); }); }
+             if (document.getElementById('login-btn-main')) {
+                document.getElementById('login-btn-main').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showLoginModal();
+                });
+            }
+            
+            loadState();
+            populateFilters();
+            renderCourses();
+        });
+    </script>
+</body>
+</html>
