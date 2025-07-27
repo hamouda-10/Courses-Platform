@@ -365,7 +365,7 @@
         }
 
         
-        /* Modal and Login Form Styles */
+        /* Modal and Auth Form Styles */
         .modal {
             display: none;
             position: fixed;
@@ -377,14 +377,13 @@
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.7);
             animation: fadeIn 0.5s;
-            /* Added for better centering */
             display: none;
             align-items: center;
             justify-content: center;
         }
         .modal-content {
             background: var(--bg-color-2);
-            margin: 1rem; /* Changed for better mobile view */
+            margin: 1rem;
             padding: 2rem;
             border-radius: var(--border-radius);
             width: 90%;
@@ -409,16 +408,43 @@
             font-size: 2rem;
             color: var(--primary-color);
             margin-bottom: 1rem;
+            text-align: center;
         }
 
-        /* === New Login Form Styles Start === */
-        .login-form {
+        /* === Auth Form Styles Start === */
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .auth-tab-link {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: var(--text-color-muted);
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex-grow: 1;
+        }
+        .auth-tab-link.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+        .auth-form-container {
+            display: none;
+        }
+        .auth-form-container.active {
+            display: block;
+        }
+        .auth-form {
             display: flex;
             flex-direction: column;
             gap: 1rem;
             margin-top: 1.5rem;
         }
-        .login-form input {
+        .auth-form input {
             padding: 12px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
@@ -428,16 +454,16 @@
             font-family: var(--font-family);
             width: 100%;
         }
-        .login-form input::placeholder {
+        .auth-form input::placeholder {
             color: var(--text-color-muted);
         }
-        .login-form button {
+        .auth-form button {
             width: 100%;
             margin-top: 0.5rem;
             padding: 12px;
             font-size: 1.1rem;
         }
-        /* === New Login Form Styles End === */
+        /* === Auth Form Styles End === */
         
         .btn-remove-item {
             background: transparent;
@@ -564,9 +590,7 @@
         
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        
-
-        /* === Responsive Styles Start === */
+    
         @media (max-width: 992px) {
             .nav-links { display: none; flex-direction: column; width: 100%; position: absolute; top: 68px; left: 0; background: var(--bg-color-2); padding: 1rem 0; border-top: 1px solid var(--border-color); }
             .nav-links.active { display: flex; }
@@ -574,7 +598,7 @@
             .menu-toggle { display: block; }
             #hero h1 { font-size: 2.5rem; }
             .nav-icons { gap: 15px; }
-            #auth-container .btn span { display: none; } /* Hide text "Login" on smaller screens */
+            #auth-container .btn span { display: none; } 
             #auth-container .btn { padding: 10px 12px; }
         }
 
@@ -586,14 +610,14 @@
             #hero h1 { font-size: 2.2rem; }
             #hero p { font-size: 1.1rem; }
 
-            .footer-col { /* Center footer content */
+            .footer-col { 
                 text-align: center;
             }
-            .footer-col h4::after { /* Center the underline */
+            .footer-col h4::after { 
                 left: 50%;
                 transform: translateX(-50%);
             }
-            .social-links { /* Center social links */
+            .social-links {
                 justify-content: center;
                 display: flex;
                 flex-wrap: wrap;
@@ -610,10 +634,10 @@
             #hero p { font-size: 1rem; }
             .section-title { font-size: 1.8rem; }
             .course-card-body { padding: 1rem; }
-            .modal-content { padding: 1.5rem; }
+            .modal-content { padding: 1.5rem; max-width: 450px; }
             #modal-body h2 { font-size: 1.5rem; }
         }
-        /* === Responsive Styles End === */
+       
 
     </style>
 </head>
@@ -644,11 +668,7 @@
                         <span class="badge" id="cart-count">0</span>
                     </a>
                   <div id="auth-container">
-                      <a href="#" class="btn btn-primary d-flex align-items-center gap-2" id="login-btn-main">
-                          <i class="fa-solid fa-right-to-bracket"></i>
-                          <span>Login</span>
-                      </a>
-                  </div>
+                      </div>
 
                 </div>
                 <div class="menu-toggle">
@@ -700,7 +720,7 @@
 
     <div id="modal" class="modal">
         <div class="modal-content">
-            <span class="close-btn">&times;</span>
+            <span class="close-btn">×</span>
             <div id="modal-body">
             </div>
         </div>
@@ -711,7 +731,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <a href="#" class="logo"><i class="fas fa-graduation-cap"></i> ProCourses <i class="fas fa-graduation-cap"></i></a>
+                    <a href="#" class="logo"><i class="fas fa-graduation-cap"></i> ProCourses</a>
                     <p>Your premier destination for professional development and skill enhancement. Join our community and transform your future today.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -750,7 +770,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                 <p>&copy; 2025 ProCourses. All rights reserved.</p>
+                 <p>© 2025 ProCourses. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -758,7 +778,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-     const courses = [
+    const courses = [
     {
         id: 1,
         title: 'Modern Web Development (React)',
@@ -787,7 +807,7 @@
         image: 'https://i.ytimg.com/vi/IyR_uYsRdPs/maxresdefault.jpg',
         description: 'Master Adobe Photoshop and learn the secrets of graphic design and photo manipulation like a pro.',
         category: 'Design',
-        videoUrl: 'https://www.youtube.com/embed/ZBylsD2jdsw'
+        videoUrl: 'https://www.youtube.com/embed/ZBylsD2oKv4'
     },
     {
         id: 4,
@@ -797,7 +817,7 @@
         image: 'https://i.ytimg.com/vi/7eh4d6sabA0/maxresdefault.jpg',
         description: 'Enter the world of big data and AI. Learn to analyze data and build powerful machine learning models.',
         category: 'Data Science',
-        videoUrl: 'https://www.youtube.com/embed/N6BghzuFLIg'
+        videoUrl: 'https://www.youtube.com/embed/ua-CiDNNj30'
     },
     {
         id: 5,
@@ -807,7 +827,7 @@
         image: 'https://i.ytimg.com/vi/tsGlD2_8u9I/maxresdefault.jpg',
         description: 'Covers SEO, Google Ads, social media marketing, and more to help you grow any business online.',
         category: 'Marketing',
-        videoUrl: 'https://www.youtube.com/embed/mK3fnYw4I8I'
+        videoUrl: 'https://www.youtube.com/embed/nU-IIXBWlS4'
     },
     {
         id: 6,
@@ -827,7 +847,7 @@
         image: 'https://i.ytimg.com/vi/l1EssrLxt7E/maxresdefault.jpg',
         description: 'Prepare for the PMP certification and learn best practices in project management to lead any project to success.',
         category: 'Business',
-        videoUrl: 'https://www.youtube.com/embed/CShex4-4P84'
+        videoUrl: 'https://www.youtube.com/embed/zFU-A_iRe4I'
     },
     {
         id: 8,
@@ -847,7 +867,7 @@
         image: 'https://i.ytimg.com/vi/l5IgdXi2UvY/maxresdefault.jpg',
         description: 'Deep dive into closures, prototypal inheritance, async/await, and other advanced JS topics.',
         category: 'Web Development',
-        videoUrl: 'https://www.youtube.com/embed/Bv_5Zv5c-Ts'
+        videoUrl: 'https://www.youtube.com/embed/2d7s3spLS-o'
     },
     {
         id: 10,
@@ -877,7 +897,7 @@
         image: 'https://i.ytimg.com/vi/jG7dSXcfVqE/maxresdefault.jpg',
         description: 'Learn how to create compelling content and build a strategy that engages your audience and drives results.',
         category: 'Marketing',
-        videoUrl: 'https://www.youtube.com/embed/8n6cI1l_OaM'
+        videoUrl: 'https://www.youtube.com/embed/Iim8Q7D_c5s'
     },
     {
         id: 13,
@@ -897,7 +917,7 @@
         image: 'https://images.shiksha.com/mediadata/images/articles/1701167453phpgYejIn.jpeg',
         description: 'Build robust financial models and learn to value companies for investment decisions.',
         category: 'Business',
-        videoUrl: 'https://www.youtube.com/embed/HTu_p-S43dc'
+        videoUrl: 'https://www.youtube.com/embed/HTu_p3-A2Ew'
     },
     {
         id: 15,
@@ -907,7 +927,7 @@
         image: 'https://i.ytimg.com/vi/gB1F9G0JXOo/maxresdefault.jpg',
         description: 'Create your own 2D and 3D games using the Unity engine and C# scripting.',
         category: 'Programming',
-        videoUrl: 'https://www.youtube.com/embed/collider'
+        videoUrl: 'https://www.youtube.com/embed/6_31A1-33kM'
     },
     {
         id: 16,
@@ -937,7 +957,7 @@
         image: 'https://images.squarespace-cdn.com/content/v1/64ee3953126c653b251cff47/1693333877922-ABPAXYHMNHIELXXPZO3H/Screen-Shot-2021-07-14-at-12.51.00-PM_0.jpg',
         description: 'Learn the art and science of photography, from camera basics to advanced editing techniques.',
         category: 'Creative Arts',
-        videoUrl: 'https://www.youtube.com/embed/6Tsf392I0b0'
+        videoUrl: 'https://www.youtube.com/embed/lx5z-3H3_gQ'
     },
     {
         id: 20,
@@ -947,7 +967,7 @@
         image: 'https://i.ytimg.com/vi/LEXUvUJ5jHw/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD70PD7s5L8RSSEkoLODbaJv0WyTQ',
         description: 'Edit stunning videos for YouTube, social media, and more using industry-standard software.',
         category: 'Creative Arts',
-        videoUrl: 'https://www.youtube.com/embed/Zt-zPS-eG5w'
+        videoUrl: 'https://www.youtube.com/embed/uA-2cyvYv-A'
     },
     {
         id: 21,
@@ -967,7 +987,7 @@
         image: 'https://i.ytimg.com/vi/guZa7mQV1l0/maxresdefault.jpg',
         description: 'Master the art of negotiation to achieve better outcomes in business and life.',
         category: 'Soft Skills',
-        videoUrl: 'https://www.youtube.com/embed/oy_H23Q7n_s'
+        videoUrl: 'https://www.youtube.com/embed/bgCo4aH4zwU'
     },
     {
         id: 23,
@@ -987,7 +1007,7 @@
         image: 'https://i.ytimg.com/vi/RBSGKlAvoiM/maxresdefault.jpg',
         description: 'Build a strong foundation in computer science with essential data structures and algorithms.',
         category: 'Programming',
-        videoUrl: 'https://www.youtube.com/embed/RBSGKlAvoiM'
+        videoUrl: 'https://www.youtube.com/embed/8hly31xKli0'
     },
     {
         id: 28,
@@ -997,7 +1017,7 @@
         image: 'https://i.ytimg.com/vi/AGrl-H87pRU/maxresdefault.jpg',
         description: 'Transform raw data into meaningful insights using Microsoft Power BI.',
         category: 'Data Science',
-        videoUrl: 'https://www.youtube.com/embed/TmhQCqAxp-A'
+        videoUrl: 'https://www.youtube.com/embed/TmhQCqAxp-g'
     },
     {
         id: 29,
@@ -1007,17 +1027,22 @@
         image: 'https://i.ytimg.com/vi/_a5j7KoflTs/maxresdefault.jpg',
         description: 'Elevate your web design skills with advanced CSS techniques and Sass preprocessor.',
         category: 'Web Development',
-        videoUrl: 'https://www.youtube.com/embed/1xFGnlnzGjw'
+        videoUrl: 'https://www.youtube.com/embed/1xFGII0A-a8'
     }
 ];
 
-            let state = { cart: [], favorites: [], theme: 'dark', isLoggedIn: false };
+            // --- STATE MANAGEMENT ---
+            let state = {
+                users: [],
+                currentUser: null,
+                theme: 'dark'
+            };
+
             const coursesContainer = document.getElementById('courses-container');
             const cartCountEl = document.getElementById('cart-count');
             const favoritesCountEl = document.getElementById('favorites-count');
             const modal = document.getElementById('modal');
             const modalBody = document.getElementById('modal-body');
-            const closeModalBtn = document.querySelector('.close-btn');
             const menuToggle = document.querySelector('.menu-toggle');
             const navLinks = document.querySelector('.nav-links');
             const themeSwitcher = document.querySelector('.theme-switcher');
@@ -1028,35 +1053,224 @@
             const authContainer = document.getElementById('auth-container');
             const contactForm = document.getElementById('contact-form');
 
-            const loadState = () => { const savedState = JSON.parse(localStorage.getItem('proCoursesState')); if (savedState) { state = savedState; } applyTheme(); updateAuthUI(); updateCounts(); };
-            const saveState = () => { localStorage.setItem('proCoursesState', JSON.stringify(state)); };
-            const showToast = (message, type = 'info') => { const toastContainer = document.getElementById('toast-container'); const toast = document.createElement('div'); toast.className = `toast ${type}`; toast.textContent = message; toastContainer.appendChild(toast); setTimeout(() => toast.classList.add('show'), 10); setTimeout(() => { toast.classList.remove('show'); toast.addEventListener('transitionend', () => toast.remove()); }, 3000); };
-            const applyTheme = () => { if (state.theme === 'light') { document.body.classList.add('light-mode'); themeSwitcher.innerHTML = `<i class="fas fa-moon"></i>`; } else { document.body.classList.remove('light-mode'); themeSwitcher.innerHTML = `<i class="fas fa-sun"></i>`; } };
+            // --- DATA PERSISTENCE ---
+            const loadState = () => {
+                const savedState = JSON.parse(localStorage.getItem('proCoursesState'));
+                if (savedState) {
+                    state.users = savedState.users || [];
+                    state.theme = savedState.theme || 'dark';
+                }
+                // currentUser is always null on page load for security
+                state.currentUser = null; 
+                applyTheme();
+                updateAuthUI();
+                updateCounts();
+            };
+            const saveState = () => {
+                // Before saving, ensure the current user's cart/favorites are updated in the main users array
+                if (state.currentUser) {
+                    const userInDb = state.users.find(u => u.id === state.currentUser.id);
+                    if (userInDb) {
+                        userInDb.cart = state.currentUser.cart;
+                        userInDb.favorites = state.currentUser.favorites;
+                    }
+                }
+                // Create a savable state without the currentUser object
+                const stateToSave = {
+                    users: state.users,
+                    theme: state.theme
+                };
+                localStorage.setItem('proCoursesState', JSON.stringify(stateToSave));
+            };
+            
+            // --- UI & HELPERS ---
+            const showToast = (message, type = 'info') => {
+                const toastContainer = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.textContent = message;
+                toastContainer.appendChild(toast);
+                setTimeout(() => toast.classList.add('show'), 10);
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    toast.addEventListener('transitionend', () => toast.remove());
+                }, 3000);
+            };
+            const applyTheme = () => {
+                if (state.theme === 'light') {
+                    document.body.classList.add('light-mode');
+                    themeSwitcher.innerHTML = `<i class="fas fa-moon"></i>`;
+                } else {
+                    document.body.classList.remove('light-mode');
+                    themeSwitcher.innerHTML = `<i class="fas fa-sun"></i>`;
+                }
+            };
             const toggleTheme = () => { state.theme = state.theme === 'dark' ? 'light' : 'dark'; applyTheme(); saveState(); };
             const renderStars = (rating) => { let stars = ''; const fullStars = Math.floor(rating); const halfStar = rating % 1 >= 0.5; const emptyStars = 5 - fullStars - (halfStar ? 1 : 0); for (let i = 0; i < fullStars; i++) stars += '<i class="fas fa-star"></i>'; if (halfStar) stars += '<i class="fas fa-star-half-alt"></i>'; for (let i = 0; i < emptyStars; i++) stars += '<i class="far fa-star"></i>'; return stars; };
             const populateFilters = () => { const categories = [...new Set(courses.map(course => course.category))]; categories.sort().forEach(category => { const option = document.createElement('option'); option.value = category; option.textContent = category; filterSelect.appendChild(option); }); };
-            const renderCourses = () => { const searchTerm = searchInput.value.toLowerCase(); const selectedCategory = filterSelect.value; const filteredCourses = courses.filter(course => { const matchesCategory = selectedCategory === 'all' || course.category === selectedCategory; const matchesSearch = course.title.toLowerCase().includes(searchTerm); return matchesCategory && matchesSearch; }); coursesContainer.innerHTML = ''; if (filteredCourses.length === 0) { coursesContainer.innerHTML = `<p style="text-align: center; width: 100%; color: var(--text-color);">No courses found matching your criteria.</p>`; return; } filteredCourses.forEach(course => { const isFavorite = state.favorites.includes(course.id); const courseCard = ` <div class="course-card"> <img src="${course.image}" alt="${course.title}" class="course-card-img"> <div class="course-card-body"> <p class="course-category">${course.category}</p> <h3 class="course-title">${course.title}</h3> <div class="course-rating"> ${renderStars(course.rating)} <span>${course.rating.toFixed(1)}</span> </div> <p class="course-price">$${course.price.toFixed(2)}</p> <div class="course-card-btns"> <button class="btn btn-primary btn-cart" data-id="${course.id}"><i class="fas fa-shopping-cart"></i> Add to Cart</button> <button class="btn btn-fav ${isFavorite ? 'active' : ''}" data-id="${course.id}" title="Add to favorites"><i class="fas fa-heart"></i></button> </div> <button class="btn btn-secondary btn-details" data-id="${course.id}" style="margin-top: 0.5rem; width:100%;">View Details</button> </div> </div> `; coursesContainer.innerHTML += courseCard; }); };
-            const updateCounts = () => { const totalCartItems = state.cart.reduce((sum, item) => sum + item.quantity, 0); cartCountEl.textContent = totalCartItems; favoritesCountEl.textContent = state.favorites.length; };
+            const closeModal = () => { modal.style.display = 'none'; };
+            
+            // --- AUTHENTICATION ---
             const updateAuthUI = () => {
-                if (state.isLoggedIn) {
-                    authContainer.innerHTML = `<a href="#" class="btn btn-secondary" id="logout-btn">Logout</a>`;
+                if (state.currentUser) {
+                    const userInitial = state.currentUser.name.charAt(0).toUpperCase();
+                    authContainer.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                           <span style="color: var(--text-color); font-weight: 600;">Hi, ${state.currentUser.name}</span>
+                           <a href="#" class="btn btn-secondary" id="logout-btn">Logout</a>
+                        </div>`;
                     document.getElementById('logout-btn').addEventListener('click', handleLogout);
                 } else {
                     authContainer.innerHTML = `<a href="#" class="btn btn-primary d-flex align-items-center gap-2" id="login-btn-main"><i class="fa-solid fa-right-to-bracket"></i><span>Login</span></a>`;
-                    document.getElementById('login-btn-main').addEventListener('click', (e) => { e.preventDefault(); showLoginModal(); });
+                    document.getElementById('login-btn-main').addEventListener('click', (e) => { e.preventDefault(); showAuthModal(); });
+                }
+                updateCounts();
+                renderCourses(); // Re-render courses to update favorite icons
+            };
+            
+            const showAuthModal = () => {
+                modalBody.innerHTML = `
+                    <div class="auth-tabs">
+                        <button class="auth-tab-link active" data-tab="login">Login</button>
+                        <button class="auth-tab-link" data-tab="register">Register</button>
+                    </div>
+                    
+                    <div id="login-container" class="auth-form-container active">
+                        <h2>Login</h2>
+                        <form class="auth-form" id="login-form">
+                            <input type="email" name="email" placeholder="Email" required>
+                            <input type="password" name="password" placeholder="Password" required>
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </form>
+                    </div>
+
+                    <div id="register-container" class="auth-form-container">
+                        <h2>Register</h2>
+                        <form class="auth-form" id="register-form">
+                             <input type="text" name="name" placeholder="Full Name" required>
+                            <input type="email" name="email" placeholder="Email" required>
+                            <input type="password" name="password" placeholder="Password" required>
+                            <button type="submit" class="btn btn-primary">Create Account</button>
+                        </form>
+                    </div>
+                `;
+                modal.style.display = 'flex';
+                
+                // Add event listeners for forms and tabs
+                document.getElementById('login-form').addEventListener('submit', handleLogin);
+                document.getElementById('register-form').addEventListener('submit', handleRegister);
+                document.querySelectorAll('.auth-tab-link').forEach(tab => {
+                    tab.addEventListener('click', (e) => {
+                        document.querySelectorAll('.auth-tab-link, .auth-form-container').forEach(el => el.classList.remove('active'));
+                        e.target.classList.add('active');
+                        document.getElementById(`${e.target.dataset.tab}-container`).classList.add('active');
+                    });
+                });
+            };
+
+            const handleRegister = (e) => {
+                e.preventDefault();
+                const form = e.target;
+                const name = form.name.value.trim();
+                const email = form.email.value.trim().toLowerCase();
+                const password = form.password.value;
+
+                if (state.users.find(user => user.email === email)) {
+                    showToast('An account with this email already exists.', 'error');
+                    return;
+                }
+                
+                const newUser = {
+                    id: Date.now(), // simple unique id
+                    name: name,
+                    email: email,
+                    password: password, // In a real app, HASH THIS PASSWORD!
+                    cart: [],
+                    favorites: []
+                };
+                
+                state.users.push(newUser);
+                showToast('Registration successful! Please log in.', 'success');
+                saveState();
+                form.reset();
+                // Switch to login tab
+                document.querySelector('.auth-tab-link[data-tab="login"]').click();
+            };
+            
+            const handleLogin = (e) => {
+                e.preventDefault();
+                const form = e.target;
+                const email = form.email.value.trim().toLowerCase();
+                const password = form.password.value;
+                
+                const user = state.users.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    state.currentUser = user;
+                    closeModal();
+                    updateAuthUI();
+                    saveState(); // Not strictly needed here, but good practice
+                    showToast(`Welcome back, ${user.name}!`, 'success');
+                } else {
+                    showToast('Invalid email or password.', 'error');
                 }
             };
-            const showLoginModal = () => { modalBody.innerHTML = ` <h2>Login</h2> <form class="login-form" id="login-form"> <input type="email" placeholder="Email (e.g., user@example.com)" required> <input type="password" placeholder="Password (any)" required> <button type="submit" class="btn btn-primary">Login</button> </form> `; modal.style.display = 'flex'; document.getElementById('login-form').addEventListener('submit', handleLogin); };
-            const handleLogin = (e) => { e.preventDefault(); state.isLoggedIn = true; closeModal(); updateAuthUI(); saveState(); showToast('Login successful!', 'success'); };
-            const handleLogout = (e) => { e.preventDefault(); state.isLoggedIn = false; updateAuthUI(); saveState(); showToast('You have been logged out.'); };
-            const requireLogin = (action) => { if (!state.isLoggedIn) { showToast('Please log in to continue.', 'error'); showLoginModal(); return false; } return true; };
-            const addToCart = (id) => { if (!requireLogin()) return; const existingItem = state.cart.find(item => item.id === id); if (existingItem) { existingItem.quantity++; showToast('Increased course quantity in cart.'); } else { state.cart.push({ id: id, quantity: 1 }); showToast('Course added to cart!', 'success'); } updateCounts(); saveState(); };
-            const updateCartQuantity = (id, change) => { const itemIndex = state.cart.findIndex(item => item.id === id); if (itemIndex > -1) { state.cart[itemIndex].quantity += change; if (state.cart[itemIndex].quantity <= 0) { state.cart.splice(itemIndex, 1); showToast('Course removed from cart.'); } else { showToast('Cart quantity updated.'); } } updateCounts(); saveState(); showCartModal(); };
-            const removeFromCart = (id) => { state.cart = state.cart.filter(item => item.id !== id); updateCounts(); saveState(); showCartModal(); showToast('Course removed from cart.'); };
-            const toggleFavorite = (id, button) => { if (!requireLogin()) return; const index = state.favorites.indexOf(id); if (index === -1) { state.favorites.push(id); button.classList.add('active'); showToast('Added to favorites!', 'success'); } else { state.favorites.splice(index, 1); button.classList.remove('active'); showToast('Removed from favorites.'); } updateCounts(); saveState(); };
-            const removeFromFavorites = (id) => { state.favorites = state.favorites.filter(courseId => courseId !== id); updateCounts(); saveState(); renderCourses(); showFavoritesModal(); showToast('Course removed from favorites.'); };
-        
-            const showDetailsModal = (id) => {
+            
+            const handleLogout = (e) => {
+                if (e) e.preventDefault();
+                showToast(`You have been logged out.`, 'info');
+                saveState(); // Save the final cart/favorites before logging out
+                state.currentUser = null;
+                updateAuthUI();
+            };
+
+            const requireLogin = (action) => {
+                if (!state.currentUser) {
+                    showToast('Please log in to continue.', 'error');
+                    showAuthModal();
+                    return false;
+                }
+                return true;
+            };
+
+            // --- COURSE & MODAL RENDERING ---
+            const renderCourses = () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedCategory = filterSelect.value;
+                const filteredCourses = courses.filter(course => {
+                    const matchesCategory = selectedCategory === 'all' || course.category === selectedCategory;
+                    const matchesSearch = course.title.toLowerCase().includes(searchTerm);
+                    return matchesCategory && matchesSearch;
+                });
+                coursesContainer.innerHTML = '';
+                if (filteredCourses.length === 0) {
+                    coursesContainer.innerHTML = `<p style="text-align: center; width: 100%; color: var(--text-color);">No courses found matching your criteria.</p>`;
+                    return;
+                }
+                filteredCourses.forEach(course => {
+                    const isFavorite = state.currentUser ? state.currentUser.favorites.includes(course.id) : false;
+                    const courseCard = `
+                        <div class="course-card">
+                            <img src="${course.image}" alt="${course.title}" class="course-card-img">
+                            <div class="course-card-body">
+                                <p class="course-category">${course.category}</p>
+                                <h3 class="course-title">${course.title}</h3>
+                                <div class="course-rating">
+                                    ${renderStars(course.rating)} <span>${course.rating.toFixed(1)}</span>
+                                </div>
+                                <p class="course-price">$${course.price.toFixed(2)}</p>
+                                <div class="course-card-btns">
+                                    <button class="btn btn-primary btn-cart" data-id="${course.id}"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                                    <button class="btn btn-fav ${isFavorite ? 'active' : ''}" data-id="${course.id}" title="Add to favorites"><i class="fas fa-heart"></i></button>
+                                </div>
+                                <button class="btn btn-secondary btn-details" data-id="${course.id}" style="margin-top: 0.5rem; width:100%;">View Details</button>
+                            </div>
+                        </div>`;
+                    coursesContainer.innerHTML += courseCard;
+                });
+            };
+
+             const showDetailsModal = (id) => {
                 const course = courses.find(c => c.id === id);
                 modalBody.innerHTML = `
                     <h2>${course.title}</h2>
@@ -1079,12 +1293,176 @@
                 modal.style.display = 'flex';
             };
 
-            const showCartModal = () => { let content = '<h2>Your Cart</h2>'; if (state.cart.length === 0) { content += '<p>Your cart is empty.</p>'; } else { const cartItemsWithDetails = state.cart.map(cartItem => ({ ...courses.find(c => c.id === cartItem.id), quantity: cartItem.quantity })); let total = 0; content += '<ul class="modal-list">'; cartItemsWithDetails.forEach(item => { total += item.price * item.quantity; content += ` <li class="modal-list-item"> <img src="${item.image}" alt="${item.title}"> <div class="modal-list-info"> <h4>${item.title}</h4> <p>$${item.price.toFixed(2)}</p> </div> <div class="quantity-controls"> <button class="btn-quantity-minus" data-id="${item.id}">-</button> <span>${item.quantity}</span> <button class="btn-quantity-plus" data-id="${item.id}">+</button> </div> <button class="btn-remove-item" data-id="${item.id}" title="Remove from cart"><i class="fas fa-trash-alt"></i></button> </li> `; }); content += '</ul>'; content += `<div class="modal-total">Total: $${total.toFixed(2)}</div>`; } modalBody.innerHTML = content; modal.style.display = 'flex'; };
-            const showFavoritesModal = () => { let content = '<h2>Your Favorites</h2>'; if (state.favorites.length === 0) { content += '<p>You have no favorite courses yet.</p>'; } else { const favoriteItems = state.favorites.map(id => courses.find(c => c.id === id)); content += '<ul class="modal-list">'; favoriteItems.forEach(item => { content += ` <li class="modal-list-item"> <img src="${item.image}" alt="${item.title}"> <div class="modal-list-info"> <h4>${item.title}</h4> <p>$${item.price.toFixed(2)}</p> </div> <button class="btn-remove-item" data-fav-id="${item.id}" title="Remove from favorites"><i class="fas fa-trash-alt"></i></button> </li> `; }); content += '</ul>'; } modalBody.innerHTML = content; modal.style.display = 'flex'; };
-            const closeModal = () => { modal.style.display = 'none'; };
+            // --- CART & FAVORITES LOGIC ---
+            const updateCounts = () => {
+                if (state.currentUser) {
+                    const totalCartItems = state.currentUser.cart.reduce((sum, item) => sum + item.quantity, 0);
+                    cartCountEl.textContent = totalCartItems;
+                    favoritesCountEl.textContent = state.currentUser.favorites.length;
+                } else {
+                    cartCountEl.textContent = 0;
+                    favoritesCountEl.textContent = 0;
+                }
+            };
+            
+            const addToCart = (id) => {
+                if (!requireLogin()) return;
+                const existingItem = state.currentUser.cart.find(item => item.id === id);
+                if (existingItem) {
+                    existingItem.quantity++;
+                    showToast('Increased course quantity in cart.');
+                } else {
+                    state.currentUser.cart.push({ id: id, quantity: 1 });
+                    showToast('Course added to cart!', 'success');
+                }
+                updateCounts();
+                saveState();
+            };
 
-            coursesContainer.addEventListener('click', (e) => { const btn = e.target.closest('.btn'); if (!btn) return; const courseId = parseInt(btn.dataset.id); if (btn.classList.contains('btn-cart')) { addToCart(courseId); } else if (btn.classList.contains('btn-fav')) { toggleFavorite(courseId, btn); } else if (btn.classList.contains('btn-details')) { showDetailsModal(courseId); } });
-            modal.addEventListener('click', (e) => { if (e.target.classList.contains('modal') || e.target.classList.contains('close-btn')) { closeModal(); } const btn = e.target.closest('button'); if (!btn) return; if(btn.classList.contains('btn-cart')) { const courseId = parseInt(btn.dataset.id); addToCart(courseId); closeModal(); } else if (btn.classList.contains('btn-remove-item')) { if(btn.dataset.id) { removeFromCart(parseInt(btn.dataset.id)); } else if (btn.dataset.favId) { removeFromFavorites(parseInt(btn.dataset.favId)); } } else if (btn.classList.contains('btn-quantity-plus')) { updateCartQuantity(parseInt(btn.dataset.id), 1); } else if (btn.classList.contains('btn-quantity-minus')) { updateCartQuantity(parseInt(btn.dataset.id), -1); } });
+            const updateCartQuantity = (id, change) => {
+                const itemIndex = state.currentUser.cart.findIndex(item => item.id === id);
+                if (itemIndex > -1) {
+                    state.currentUser.cart[itemIndex].quantity += change;
+                    if (state.currentUser.cart[itemIndex].quantity <= 0) {
+                        state.currentUser.cart.splice(itemIndex, 1);
+                        showToast('Course removed from cart.');
+                    } else {
+                        showToast('Cart quantity updated.');
+                    }
+                }
+                updateCounts();
+                saveState();
+                showCartModal();
+            };
+
+            const removeFromCart = (id) => {
+                state.currentUser.cart = state.currentUser.cart.filter(item => item.id !== id);
+                updateCounts();
+                saveState();
+                showCartModal();
+                showToast('Course removed from cart.');
+            };
+            
+            const toggleFavorite = (id, button) => {
+                if (!requireLogin()) return;
+                const index = state.currentUser.favorites.indexOf(id);
+                if (index === -1) {
+                    state.currentUser.favorites.push(id);
+                    button.classList.add('active');
+                    showToast('Added to favorites!', 'success');
+                } else {
+                    state.currentUser.favorites.splice(index, 1);
+                    button.classList.remove('active');
+                    showToast('Removed from favorites.');
+                }
+                updateCounts();
+                saveState();
+            };
+            
+            const removeFromFavorites = (id) => {
+                state.currentUser.favorites = state.currentUser.favorites.filter(courseId => courseId !== id);
+                updateCounts();
+                saveState();
+                renderCourses();
+                showFavoritesModal();
+                showToast('Course removed from favorites.');
+            };
+
+            // --- CART & FAVORITES MODALS ---
+            const showCartModal = () => {
+                let content = '<h2>Your Cart</h2>';
+                if (state.currentUser.cart.length === 0) {
+                    content += '<p>Your cart is empty.</p>';
+                } else {
+                    const cartItemsWithDetails = state.currentUser.cart.map(cartItem => ({ ...courses.find(c => c.id === cartItem.id), quantity: cartItem.quantity }));
+                    let total = 0;
+                    content += '<ul class="modal-list">';
+                    cartItemsWithDetails.forEach(item => {
+                        total += item.price * item.quantity;
+                        content += `
+                            <li class="modal-list-item">
+                                <img src="${item.image}" alt="${item.title}">
+                                <div class="modal-list-info">
+                                    <h4>${item.title}</h4>
+                                    <p>$${item.price.toFixed(2)}</p>
+                                </div>
+                                <div class="quantity-controls">
+                                    <button class="btn-quantity-minus" data-id="${item.id}">-</button>
+                                    <span>${item.quantity}</span>
+                                    <button class="btn-quantity-plus" data-id="${item.id}">+</button>
+                                </div>
+                                <button class="btn-remove-item" data-id="${item.id}" title="Remove from cart"><i class="fas fa-trash-alt"></i></button>
+                            </li>`;
+                    });
+                    content += '</ul>';
+                    content += `<div class="modal-total">Total: $${total.toFixed(2)}</div>`;
+                }
+                modalBody.innerHTML = content;
+                modal.style.display = 'flex';
+            };
+            
+            const showFavoritesModal = () => {
+                let content = '<h2>Your Favorites</h2>';
+                if (state.currentUser.favorites.length === 0) {
+                    content += '<p>You have no favorite courses yet.</p>';
+                } else {
+                    const favoriteItems = state.currentUser.favorites.map(id => courses.find(c => c.id === id));
+                    content += '<ul class="modal-list">';
+                    favoriteItems.forEach(item => {
+                        content += `
+                            <li class="modal-list-item">
+                                <img src="${item.image}" alt="${item.title}">
+                                <div class="modal-list-info">
+                                    <h4>${item.title}</h4>
+                                    <p>$${item.price.toFixed(2)}</p>
+                                </div>
+                                <button class="btn-remove-item" data-fav-id="${item.id}" title="Remove from favorites"><i class="fas fa-trash-alt"></i></button>
+                            </li>`;
+                    });
+                    content += '</ul>';
+                }
+                modalBody.innerHTML = content;
+                modal.style.display = 'flex';
+            };
+
+            // --- EVENT LISTENERS ---
+            coursesContainer.addEventListener('click', (e) => {
+                const btn = e.target.closest('button');
+                if (!btn) return;
+                const courseId = parseInt(btn.dataset.id);
+                if (btn.classList.contains('btn-cart')) {
+                    addToCart(courseId);
+                } else if (btn.classList.contains('btn-fav')) {
+                    toggleFavorite(courseId, btn);
+                } else if (btn.classList.contains('btn-details')) {
+                    showDetailsModal(courseId);
+                }
+            });
+
+            modal.addEventListener('click', (e) => {
+                // Close modal logic
+                if (e.target.classList.contains('modal') || e.target.classList.contains('close-btn')) {
+                    closeModal();
+                    return;
+                }
+                
+                const btn = e.target.closest('button');
+                if (!btn) return;
+
+                // Handle button clicks inside modals
+                if(btn.classList.contains('btn-cart')) {
+                    const courseId = parseInt(btn.dataset.id);
+                    addToCart(courseId);
+                    closeModal();
+                } else if (btn.classList.contains('btn-remove-item')) {
+                    if(btn.dataset.id) { removeFromCart(parseInt(btn.dataset.id)); }
+                    else if (btn.dataset.favId) { removeFromFavorites(parseInt(btn.dataset.favId)); }
+                } else if (btn.classList.contains('btn-quantity-plus')) {
+                    updateCartQuantity(parseInt(btn.dataset.id), 1);
+                } else if (btn.classList.contains('btn-quantity-minus')) {
+                    updateCartQuantity(parseInt(btn.dataset.id), -1);
+                }
+            });
             
             menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
             themeSwitcher.addEventListener('click', toggleTheme);
@@ -1094,6 +1472,7 @@
             filterSelect.addEventListener('change', renderCourses);
             if (contactForm) { contactForm.addEventListener('submit', (e) => { e.preventDefault(); showToast('Message sent successfully!', 'success'); contactForm.reset(); }); }
             
+            // --- INITIALIZATION ---
             loadState();
             populateFilters();
             renderCourses();
